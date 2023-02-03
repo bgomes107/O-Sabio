@@ -1,0 +1,17 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/Greek Column.otf",
+      "sha1": "7358cbf6ae4fe7acbb8575456e18d9a84e44e34d"
+    },
+    {
+      "path": "src/assets/fonts/Greek Mythology.ttf",
+      "sha1": "300a0720db156c9c1a274a6f01100efc0e1f9d10"
+    },
+    {
+      "path": "src/assets/fonts/geek.ttf",
+      "sha1": "004215044808e75a3534fa6af8efa8cd03965de2"
+    }
+  ]
+}
