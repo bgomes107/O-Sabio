@@ -38,7 +38,7 @@ const Principios = () => {
   return (
 
     <SafeAreaView style={styles.container}>
-      <ScrollView style={{ marginTop: height * 0.015 }}>
+      <ScrollView indicatorStyle={theme == false ? 'black' : 'white'} style={{ marginTop: height * 0.015 }}>
         <List.Section
           title='Princípios Estoicos:'
           titleStyle={{ fontSize: fontScale * 18, color: theme == false ? '#000' : '#e5e5e5', fontWeight: 'bold' }}>
