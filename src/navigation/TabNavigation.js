@@ -1,7 +1,8 @@
 import { useContext } from 'react';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Text, View, KeyboardAvoidingView, useWindowDimensions } from 'react-native';
+import { scale, verticalScale, moderateScale, ScaledSheet } from 'react-native-size-matters';
+import { Text, View, KeyboardAvoidingView } from 'react-native';
 import { TestIds, BannerAd, BannerAdSize } from 'react-native-google-mobile-ads';
 import useKeyboard from '../components/KeyboardEvents';
 import { ThemeContext } from '../context/Context';
@@ -21,7 +22,6 @@ const Tab = createMaterialBottomTabNavigator();
 const TabNavigation = () => {
 
   const { theme } = useContext(ThemeContext);
-  const { height, width, scale, fontScale } = useWindowDimensions();
   const isKeyboardOpen = useKeyboard();
 
   return (
@@ -34,8 +34,8 @@ const TabNavigation = () => {
         barStyle={{
           backgroundColor: theme == false ? '#0033ff' : '#323232',
           borderTopColor: theme == false ? '#0033ff' : '#323232',
-          height: height * 0.098,
-          // justifyContent: 'center'
+          height: verticalScale(53),
+          justifyContent: 'center',
 
         }}
       >
@@ -46,12 +46,12 @@ const TabNavigation = () => {
             tabBarLabel: <Text style={{
               color: theme == false ? '#fff' : '#e5e5e5',
               fontWeight: 'bold',
-              fontSize: fontScale * 12
+              fontSize: scale(10)
             }}>
               Início
             </Text>,
             tabBarIcon: ({ color }) => (
-              <MaterialCommunityIcons name="home" color={color} size={height * 0.033} />
+              <MaterialCommunityIcons name="home" color={color} size={scale(21)} />
             ),
           }}
         />
@@ -62,12 +62,12 @@ const TabNavigation = () => {
             tabBarLabel: <Text style={{
               color: theme == false ? '#fff' : '#e5e5e5',
               fontWeight: 'bold',
-              fontSize: fontScale * 12
+              fontSize: scale(10)
             }}>
               Autores
             </Text>,
             tabBarIcon: ({ color }) => (
-              <MaterialCommunityIcons name="book-account" color={color} size={height * 0.033} />
+              <MaterialCommunityIcons name="book-account" color={color} size={scale(21)} />
             ),
           }}
         />
@@ -78,12 +78,12 @@ const TabNavigation = () => {
             tabBarLabel: <Text style={{
               color: theme == false ? '#fff' : '#e5e5e5',
               fontWeight: 'bold',
-              fontSize: fontScale * 12
+              fontSize: scale(10)
             }}>
               Princípios
             </Text>,
             tabBarIcon: ({ color }) => (
-              <MaterialCommunityIcons name="pillar" color={color} size={height * 0.033} />
+              <MaterialCommunityIcons name="pillar" color={color} size={scale(21)} />
             ),
 
           }}
@@ -95,12 +95,12 @@ const TabNavigation = () => {
             tabBarLabel: <Text style={{
               color: theme == false ? '#fff' : '#e5e5e5',
               fontWeight: 'bold',
-              fontSize: fontScale * 12
+              fontSize: scale(10)
             }}>
               Favoritos
             </Text>,
             tabBarIcon: ({ color }) => (
-              <MaterialCommunityIcons name="heart" color={color} size={height * 0.033} />
+              <MaterialCommunityIcons name="heart" color={color} size={scale(21)} />
             ),
           }}
         />
@@ -111,12 +111,12 @@ const TabNavigation = () => {
             tabBarLabel: <Text style={{
               color: theme == false ? '#fff' : '#e5e5e5',
               fontWeight: 'bold',
-              fontSize: fontScale * 12
+              fontSize: scale(10)
             }}>
               Menu
             </Text>,
             tabBarIcon: ({ color }) => (
-              <MaterialCommunityIcons name="menu" color={color} size={height * 0.030} />
+              <MaterialCommunityIcons name="menu" color={color} size={scale(21)} />
             ),
           }}
         />
@@ -125,21 +125,23 @@ const TabNavigation = () => {
         behavior='padding'
         style={{
           position: 'absolute',
-          bottom: isKeyboardOpen ? height * 0.130 : height * 0.097,
+          bottom: isKeyboardOpen ? verticalScale(79) : verticalScale(59),
           alignItems: 'center',
           justifyContent: 'center',
-          width: width * 1,
+          width: scale(351)
         }}
 
       >
         <BannerAd
-          size={BannerAdSize.BANNER}
+          size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
           unitId={adUnitId}
           requestOptions={{
             requestNonPersonalizedAdsOnly: true,
           }}
         />
       </KeyboardAvoidingView>
+
+
     </View>
 
 

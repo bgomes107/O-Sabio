@@ -6,7 +6,6 @@ import { ContextProvider } from './src/context/Context';
 import { navigationRef } from './src/navigation/RootNavigation';
 import { StatusBarComponent } from './src/components/StatusBarComponent';
 import { withIAPContext } from 'react-native-iap';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 
 const App = () => {

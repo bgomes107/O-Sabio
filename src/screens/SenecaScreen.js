@@ -2,14 +2,13 @@ import React, { useState, useEffect, useContext } from 'react';
 import {
   View,
   Text,
-  StyleSheet,
   SafeAreaView,
   Share,
   ActivityIndicator,
-  useWindowDimensions
 } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 import Carousel from 'react-native-reanimated-carousel';
+import { scale, verticalScale, moderateScale, ScaledSheet } from 'react-native-size-matters';
 import { ThemeContext } from '../context/Context';
 import { IconButton, Snackbar } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -24,7 +23,6 @@ const MarcoScreen = () => {
   const [removeVisible, setRemoveVisible] = useState(false);
   const [spinner, setSpinner] = useState(false);
   const { theme } = useContext(ThemeContext);
-  const { height, width, scale, fontScale } = useWindowDimensions();
 
   const isFocused = useIsFocused();
 
@@ -125,66 +123,67 @@ const MarcoScreen = () => {
   const onDismissFav = () => setFavVisible(false);
   const onDismissRemov = () => setRemoveVisible(false);
 
-  const styles = StyleSheet.create({
+  const styles = ScaledSheet.create({
 
     container: {
       flex: 1,
       backgroundColor: theme == false ? '#e9e9e9' : '#191919',
       alignItems: 'center',
       justifyContent: 'center',
+      paddingBottom: '70@mvs'
     },
 
     item: {
       backgroundColor: theme == false ? '#fff' : '#323232',
-      padding: height * 0.02,
-      borderRadius: height * 0.023,
+      padding: '6@ms',
+      borderRadius: '12@s',
     },
 
     titleContainer: {
       justifyContent: 'space-between',
       alignItems: 'center',
-      marginTop: height * 0.018,
-      marginLeft: width * 0.028,
+      marginTop: '16@vs',
+      marginLeft: '12@s',
       flexDirection: 'row'
     },
 
     title: {
-      fontSize: fontScale * 23,
+      fontSize: '23@s',
       fontWeight: 'bold',
       color: theme == false ? '#000' : '#e5e5e5',
     },
 
     subTitle: {
-      fontSize: fontScale * 19,
+      fontSize: '20@s',
       fontWeight: 'bold',
       color: theme == false ? '#000' : '#e5e5e5',
     },
 
     line: {
       backgroundColor: theme == false ? '#000' : '#e5e5e5',
-      height: height * 0.002,
-      marginLeft: width * 0.024,
-      marginRight: width * 0.024,
-      marginTop: height * 0.024
+      height: '0.8@vs',
+      marginLeft: '12@s',
+      marginRight: '12@s',
+      marginTop: '16@vs'
     },
 
     textContainer: {
       flex: 1,
-      padding: height * 0.018
+      padding: '12@ms'
     },
 
     texto: {
-      fontSize: fontScale * 18,
+      fontSize: '16@s',
       fontWeight: 'bold',
       color: theme == false ? '#000' : '#e5e5e5',
       textAlign: 'left'
     },
 
     obra: {
-      fontSize: fontScale * 17,
+      fontSize: '16@s',
       fontWeight: 'bold',
       color: theme == false ? '#000' : '#e5e5e5',
-      marginTop: height * 0.018
+      marginTop: '15@vs'
     },
 
 
@@ -200,7 +199,7 @@ const MarcoScreen = () => {
           color={theme == false ? '#0033ff' : '#e5e5e5'}
           style={{
             flex: 1,
-            marginTop:height * 0.230
+            marginTop: verticalScale(180)
           }}
         />
       ) : (
@@ -208,10 +207,10 @@ const MarcoScreen = () => {
           <Carousel
             mode='parallax'
             pagingEnabled
-            vertical
+            vertical={false}
             loop={false}
-            width={width * 1.1}
-            height={height * 0.730}
+            width={scale(385)}
+            height={verticalScale(536)}
             windowSize={3}
             data={
               DATA.filter((item) => {
@@ -228,13 +227,13 @@ const MarcoScreen = () => {
                     <Text style={styles.title}>{item.nome}</Text>
                     <Text style={styles.subTitle}>{item.ocupacao}</Text>
                   </View>
-                  <View style={{ flexDirection: 'row', paddingRight: width * 0.025, justifyContent: 'flex-end' }}>
+                  <View style={{ flexDirection: 'row', paddingRight: moderateScale(18), justifyContent: 'flex-end' }}>
                     <IconButton
                       onPress={() => onShareQuote(item.nome, item.texto)}
                       icon='share'
                       iconColor={theme == false ? '#000' : '#e5e5e5'}
                       containerColor={theme == false ? '#e9e9e9' : '#191919'}
-                      size={height * 0.038}
+                      size={scale(24)}
                       mode='contained-tonal'
                       animated={true}
                     />
@@ -244,7 +243,7 @@ const MarcoScreen = () => {
                         icon='cards-heart'
                         iconColor={theme == false ? '#000' : '#e5e5e5'}
                         containerColor={theme == false ? '#e9e9e9' : '#191919'}
-                        size={height * 0.038}
+                        size={scale(24)}
                         mode='contained-tonal'
                         animated={true}
                       />
@@ -255,7 +254,7 @@ const MarcoScreen = () => {
                         icon='cards-heart-outline'
                         iconColor={theme == false ? '#000' : '#e5e5e5'}
                         containerColor={theme == false ? '#e9e9e9' : '#191919'}
-                        size={height * 0.038}
+                        size={scale(24)}
                         mode='contained-tonal'
                         animated={true}
                       />
@@ -279,10 +278,10 @@ const MarcoScreen = () => {
           duration={2000}
           onDismiss={onDismissFav}
           elevation={5}
-          style={{ backgroundColor: theme == false ? '#323232' : '#e5e5e5', marginBottom: height * 0.009 }}
+          style={{ backgroundColor: theme == false ? '#323232' : '#e5e5e5', marginBottom: verticalScale(38) }}
         >
           <Text style={{
-            fontSize: fontScale * 14,
+            fontSize: scale(12),
             color: theme == false ? '#fff' : '#323232',
             textAlign: 'center',
             fontWeight: 'bold'
@@ -296,10 +295,10 @@ const MarcoScreen = () => {
           duration={2000}
           onDismiss={onDismissRemov}
           elevation={5}
-          style={{ backgroundColor: theme == false ? '#323232' : '#e5e5e5', marginBottom: height * 0.009 }}
+          style={{ backgroundColor: theme == false ? '#323232' : '#e5e5e5', marginBottom: verticalScale(38) }}
         >
           <Text style={{
-            fontSize: fontScale * 14,
+            fontSize: scale(12),
             color: theme == false ? '#fff' : '#323232',
             textAlign: 'center',
             fontWeight: 'bold'

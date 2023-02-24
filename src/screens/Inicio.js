@@ -2,14 +2,13 @@ import React, { useState, useEffect, useContext } from 'react';
 import {
     View,
     Text,
-    StyleSheet,
     SafeAreaView,
     Share,
-    ActivityIndicator,
-    useWindowDimensions
+    ActivityIndicator
 } from 'react-native';
 import { IconButton, Snackbar } from 'react-native-paper';
 import Carousel from 'react-native-reanimated-carousel';
+import { scale, verticalScale, moderateScale, moderateVerticalScale, ScaledSheet } from 'react-native-size-matters';
 import { useIsFocused } from '@react-navigation/native';
 import notifee from '@notifee/react-native';
 import { ThemeContext } from '../context/Context';
@@ -26,7 +25,6 @@ const Inicio = () => {
     const [loading, setLoading] = useState(false);
     const [favVisible, setFavVisible] = useState(false);
     const [removeVisible, setRemoveVisible] = useState(false);
-    const { height, width, scale, fontScale } = useWindowDimensions();
     const { theme } = useContext(ThemeContext);
 
     const isFocused = useIsFocused();
@@ -147,66 +145,67 @@ const Inicio = () => {
     const onDismissFav = () => setFavVisible(false);
     const onDismissRemov = () => setRemoveVisible(false);
 
-    const styles = StyleSheet.create({
+    const styles = ScaledSheet.create({
 
         container: {
             flex: 1,
             backgroundColor: theme == false ? '#e9e9e9' : '#191919',
             alignItems: 'center',
             justifyContent: 'center',
+            paddingBottom: '70@mvs'
         },
 
         item: {
             backgroundColor: theme == false ? '#fff' : '#323232',
-            padding: height * 0.02,
-            borderRadius: height * 0.023,
+            padding: '6@ms',
+            borderRadius: '12@s',
         },
 
         titleContainer: {
             justifyContent: 'space-between',
             alignItems: 'center',
-            marginTop: height * 0.018,
-            marginLeft: width * 0.028,
+            marginTop: '16@vs',
+            marginLeft: '12@s',
             flexDirection: 'row'
         },
 
         title: {
-            fontSize: fontScale * 24,
+            fontSize: '23@s',
             fontWeight: 'bold',
             color: theme == false ? '#000' : '#e5e5e5',
         },
 
         subTitle: {
-            fontSize: fontScale * 21,
+            fontSize: '20@s',
             fontWeight: 'bold',
             color: theme == false ? '#000' : '#e5e5e5',
         },
 
         line: {
             backgroundColor: theme == false ? '#000' : '#e5e5e5',
-            height: height * 0.002,
-            marginLeft: width * 0.024,
-            marginRight: width * 0.024,
-            marginTop: height * 0.024
+            height: '0.8@vs',
+            marginLeft: '12@s',
+            marginRight: '12@s',
+            marginTop: '16@vs'
         },
 
         textContainer: {
             flex: 1,
-            padding: height * 0.014
+            padding: '12@ms'
         },
 
         texto: {
-            fontSize: fontScale * 19.5,
+            fontSize: '16@s',
             fontWeight: 'bold',
             color: theme == false ? '#000' : '#e5e5e5',
             textAlign: 'left'
         },
 
         obra: {
-            fontSize: fontScale * 18,
+            fontSize: '16@s',
             fontWeight: 'bold',
             color: theme == false ? '#000' : '#e5e5e5',
-            marginTop: height * 0.018
+            marginTop: '15@vs'
         },
 
 
@@ -222,7 +221,7 @@ const Inicio = () => {
                     color={theme == false ? '#0033ff' : '#e5e5e5'}
                     style={{
                         flex: 1,
-                        marginTop: height * 0.230,
+                        marginTop: verticalScale(180),
                     }}
                 />
             ) : (
@@ -233,9 +232,8 @@ const Inicio = () => {
                         vertical={false}
                         defaultIndex={notificationId ? notificationId : 0}
                         loop={false}
-                        width={width * 1.1}
-                        height={height * 0.730}
-                        style={{ marginBottom: height * 0.18 }}
+                        width={scale(385)}
+                        height={verticalScale(536)}
                         windowSize={3}
                         data={DATA}
                         scrollAnimationDuration={220}
@@ -246,13 +244,13 @@ const Inicio = () => {
                                         <Text style={styles.title}>{item.nome}</Text>
                                         <Text style={styles.subTitle}>{item.ocupacao}</Text>
                                     </View>
-                                    <View style={{ flexDirection: 'row', paddingRight: width * 0.025, justifyContent: 'flex-end' }}>
+                                    <View style={{ flexDirection: 'row', paddingRight: moderateScale(18), justifyContent: 'flex-end' }}>
                                         <IconButton
                                             onPress={() => onShareQuote(item.nome, item.texto)}
                                             icon='share'
                                             iconColor={theme == false ? '#000' : '#e5e5e5'}
                                             containerColor={theme == false ? '#e9e9e9' : '#191919'}
-                                            size={height * 0.038}
+                                            size={scale(24)}
                                             mode='contained-tonal'
                                             animated={true}
                                         />
@@ -262,7 +260,7 @@ const Inicio = () => {
                                                 icon='cards-heart'
                                                 iconColor={theme == false ? '#000' : '#e5e5e5'}
                                                 containerColor={theme == false ? '#e9e9e9' : '#191919'}
-                                                size={height * 0.038}
+                                                size={scale(24)}
                                                 mode='contained-tonal'
                                                 animated={true}
                                             />
@@ -273,7 +271,7 @@ const Inicio = () => {
                                                 icon='cards-heart-outline'
                                                 iconColor={theme == false ? '#000' : '#e5e5e5'}
                                                 containerColor={theme == false ? '#e9e9e9' : '#191919'}
-                                                size={height * 0.038}
+                                                size={scale(24)}
                                                 mode='contained-tonal'
                                                 animated={true}
                                             />
@@ -297,10 +295,10 @@ const Inicio = () => {
                     duration={2000}
                     onDismiss={onDismissFav}
                     elevation={5}
-                    style={{ backgroundColor: theme == false ? '#323232' : '#e5e5e5', marginBottom: height * 0.08 }}
+                    style={{ backgroundColor: theme == false ? '#323232' : '#e5e5e5', marginBottom: verticalScale(38) }}
                 >
                     <Text style={{
-                        fontSize: fontScale * 14,
+                        fontSize: scale(12),
                         color: theme == false ? '#fff' : '#323232',
                         textAlign: 'center',
                         fontWeight: 'bold'
@@ -314,10 +312,10 @@ const Inicio = () => {
                     duration={2000}
                     onDismiss={onDismissRemov}
                     elevation={5}
-                    style={{ backgroundColor: theme == false ? '#323232' : '#e5e5e5', marginBottom: height * 0.08 }}
+                    style={{ backgroundColor: theme == false ? '#323232' : '#e5e5e5', marginBottom: verticalScale(38) }}
                 >
                     <Text style={{
-                        fontSize: fontScale * 14,
+                        fontSize: scale(12),
                         color: theme == false ? '#fff' : '#323232',
                         textAlign: 'center',
                         fontWeight: 'bold'

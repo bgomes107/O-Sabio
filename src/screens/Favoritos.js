@@ -2,17 +2,15 @@ import React, { useState, useEffect, useContext } from 'react';
 import {
     SafeAreaView,
     Text,
-    StyleSheet,
     View,
     FlatList,
     Share,
-    Dimensions,
-    useWindowDimensions
 } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 import { ThemeContext } from '../context/Context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Card, Title, Paragraph, IconButton, Snackbar } from 'react-native-paper';
+import { scale, verticalScale, moderateScale, ScaledSheet } from 'react-native-size-matters';
 
 
 const Favoritos = () => {
@@ -21,7 +19,6 @@ const Favoritos = () => {
     const [removeVisible, setRemoveVisible] = useState(false);
     const [isLoading, setIsloading] = useState(true);
     const { theme } = useContext(ThemeContext);
-    const { height, width, scale, fontScale } = useWindowDimensions();
 
     const isFocused = useIsFocused();
 
@@ -78,7 +75,7 @@ const Favoritos = () => {
         return (
             <View
                 style={{
-                    height: height * 0.005,
+                    height: verticalScale(5),
                 }}
             />
         );
@@ -87,37 +84,38 @@ const Favoritos = () => {
     const removeSnackBar = () => setRemoveVisible(!removeVisible);
     const onDismissRemov = () => setRemoveVisible(false);
 
-    const styles = StyleSheet.create({
+    const styles = ScaledSheet.create({
         container: {
             backgroundColor: theme == false ? '#e9e9e9' : '#191919',
             flex: 1,
-            paddingBottom: height * 0.065
+            paddingBottom: '67@mvs'
         },
 
         title: {
-            fontSize: fontScale * 17,
+            fontSize: '16@s',
             fontWeight: 'bold',
             color: theme == false ? '#000' : '#e5e5e5',
-            marginLeft: width * 0.035
+            marginLeft: '15@s',
+            marginTop: '9@vs'
         },
 
         texto: {
-            fontSize: fontScale * 15,
+            fontSize: '14@s',
             fontWeight: 'bold',
             color: theme == false ? '#000' : '#e5e5e5',
-            marginTop: height * 0.03
+            marginTop: '9@vs'
         },
 
         obra: {
-            fontSize: fontScale * 14,
+            fontSize: '14@s',
             fontWeight: 'bold',
             color: theme == false ? '#000' : '#e5e5e5',
-            marginTop: height * 0.0400
+            marginTop: '9@vs'
         },
 
         btnArea: {
             flexDirection: 'row',
-            paddingTop: height * 0.015,
+            paddingTop: '12@mvs',
             justifyContent: 'space-between'
         }
     });
@@ -132,7 +130,7 @@ const Favoritos = () => {
                     justifyContent: 'center'
                 }}>
                     <Text style={{
-                        fontSize: fontScale * 16,
+                        fontSize: scale(16),
                         fontWeight: 'bold',
                         color: theme == false ? '#000' : '#e5e5e5'
                     }}>
@@ -146,8 +144,8 @@ const Favoritos = () => {
                     keyExtractor={(item, index) => String(index)}
                     ItemSeparatorComponent={ItemSeparatorView}
                     renderItem={({ index, item }) => (
-                        <View style={{ padding: height * 0.017 }}>
-                            <Card style={{ backgroundColor: theme == false ? '#fff' : '#323232', padding: height * 0.006 }}>
+                        <View style={{ padding: moderateScale(12) }}>
+                            <Card style={{ backgroundColor: theme == false ? '#fff' : '#323232', padding: moderateScale(3) }}>
                                 <Title style={styles.title}>{item.nome}</Title>
                                 <Card.Content>
                                     <Paragraph style={styles.texto}>{item.texto}</Paragraph>
@@ -161,7 +159,7 @@ const Favoritos = () => {
                                         icon='share'
                                         iconColor={theme == false ? '#000' : '#e5e5e5'}
                                         containerColor={theme == false ? '#e9e9e9' : '#191919'}
-                                        size={height * 0.032}
+                                        size={scale(21)}
                                         mode='contained-tonal'
                                         animated={true}
                                     />
@@ -171,7 +169,7 @@ const Favoritos = () => {
                                         icon='delete'
                                         iconColor={theme == false ? '#000' : '#e5e5e5'}
                                         containerColor={theme == false ? '#e9e9e9' : '#191919'}
-                                        size={height * 0.032}
+                                        size={scale(21)}
                                         mode='contained-tonal'
                                         animated={true}
                                     />
@@ -187,10 +185,10 @@ const Favoritos = () => {
                 duration={2000}
                 onDismiss={onDismissRemov}
                 elevation={5}
-                style={{ backgroundColor: theme == false ? '#323232' : '#e5e5e5', marginBottom: height * 0.009 }}
+                style={{ backgroundColor: theme == false ? '#323232' : '#e5e5e5', marginBottom: verticalScale(78) }}
             >
                 <Text style={{
-                    fontSize: fontScale * 14,
+                    fontSize: scale(12),
                     color: theme == false ? '#fff' : '#323232',
                     textAlign: 'center',
                     fontWeight: 'bold'

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Text, useWindowDimensions } from 'react-native';
+import { Text } from 'react-native';
+import { scale, verticalScale, moderateScale, ScaledSheet } from 'react-native-size-matters';
 import { ThemeContext } from '../context/Context';
 
 // Telas
@@ -23,7 +24,6 @@ const Home = createStackNavigator();
 export const InicioStackScreen = () => {
 
   const { theme } = useContext(ThemeContext);
-  const { height, width, scale, fontScale } = useWindowDimensions();
 
   return (
 
@@ -34,9 +34,9 @@ export const InicioStackScreen = () => {
         },
         headerTitle: () => (
           <Text style={{
-            fontSize: fontScale * 27,
+            fontSize: scale(25),
             color: theme == false ? '#fff' : '#e5e5e5',
-            marginLeft: width * 0.015,
+            marginLeft: scale(7),
             fontFamily: 'geek'
           }}>
             o Sabio
@@ -72,7 +72,6 @@ const Principles = createStackNavigator();
 export const PrincipiosStackScreen = () => {
 
   const { theme } = useContext(ThemeContext);
-  const { height, width, scale, fontScale } = useWindowDimensions();
 
   return (
 
@@ -83,9 +82,9 @@ export const PrincipiosStackScreen = () => {
         },
         headerTitle: () => (
           <Text style={{
-            fontSize: fontScale * 27,
+            fontSize: scale(25),
             color: theme == false ? '#fff' : '#e5e5e5',
-            marginLeft: width * 0.015,
+            marginLeft: scale(7),
             fontFamily: 'geek'
           }}>
             o Sabio
@@ -122,7 +121,6 @@ const Autors = createStackNavigator();
 export const AutoresStackScreen = () => {
 
   const { theme } = useContext(ThemeContext);
-  const { height, width, scale, fontScale } = useWindowDimensions();
 
   return (
 
@@ -133,9 +131,9 @@ export const AutoresStackScreen = () => {
         },
         headerTitle: () => (
           <Text style={{
-            fontSize: fontScale * 23,
+            fontSize: scale(25),
             color: theme == false ? '#fff' : '#e5e5e5',
-            marginLeft: width * 0.015,
+            marginLeft: scale(7),
             fontFamily: 'geek'
           }}>
             o Sabio
@@ -197,7 +195,6 @@ const Favorites = createStackNavigator();
 export const FavoritosStackScreen = () => {
 
   const { theme } = useContext(ThemeContext);
-  const { height, width, scale, fontScale } = useWindowDimensions();
 
   return (
 
@@ -208,9 +205,9 @@ export const FavoritosStackScreen = () => {
         },
         headerTitle: () => (
           <Text style={{
-            fontSize: fontScale * 27,
+            fontSize: scale(25),
             color: theme == false ? '#fff' : '#e5e5e5',
-            marginLeft: width * 0.015,
+            marginLeft: scale(7),
             fontFamily: 'geek'
           }}>
             o Sabio
@@ -248,7 +245,6 @@ const Settings = createStackNavigator();
 export const MenuStackScreen = () => {
 
   const { theme } = useContext(ThemeContext);
-  const { height, width, scale, fontScale } = useWindowDimensions();
 
   return (
 
@@ -259,9 +255,9 @@ export const MenuStackScreen = () => {
         },
         headerTitle: () => (
           <Text style={{
-            fontSize: fontScale * 27,
+            fontSize: scale(25),
             color: theme == false ? '#fff' : '#e5e5e5',
-            marginLeft: width * 0.015,
+            marginLeft: scale(7),
             fontFamily: 'geek'
           }}>
             o Sabio

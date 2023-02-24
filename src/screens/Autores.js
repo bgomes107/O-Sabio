@@ -2,15 +2,14 @@ import React, { useState, useEffect, useContext } from 'react';
 import {
     View,
     Text,
-    StyleSheet,
     SafeAreaView,
     FlatList,
     ActivityIndicator,
-    useWindowDimensions
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Card, Title, Paragraph, Button } from 'react-native-paper';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { scale, verticalScale, moderateScale, ScaledSheet, s } from 'react-native-size-matters';
 import { ThemeContext } from '../context/Context';
 import Biografia from '../data/Biografia';
 
@@ -20,7 +19,6 @@ const Autores = () => {
 
     const [spinner, setSpinner] = useState(false);
     const { theme } = useContext(ThemeContext);
-    const { height, width, scale, fontScale } = useWindowDimensions();
 
     const navigation = useNavigation();
 
@@ -39,57 +37,57 @@ const Autores = () => {
 
     }
 
-    const styles = StyleSheet.create({
+    const styles = ScaledSheet.create({
         container: {
             flex: 1,
             backgroundColor: theme == false ? '#e9e9e9' : '#191919',
-            paddingBottom: height * 0.075,
+            paddingBottom: '66@mvs'
         },
 
         cardContainer: {
-            padding: height * 0.02,
+            padding: '9@ms',          
         },
 
         image: {
-            height: height * 0.45
+            height: '260@vs'
         },
 
         title: {
-            fontSize: fontScale * 18,
+            fontSize: '19@s',
             fontWeight: 'bold',
             color: theme == false ? '#000' : '#e5e5e5',
-            marginLeft: width * 0.03,
-            marginTop: height * 0.03
+            marginLeft: '13@s',
+            marginTop: '12@vs'
         },
 
         ocupacao: {
-            fontSize: fontScale * 16,
+            fontSize: '14@s',
             fontWeight: 'bold',
             color: theme == false ? '#000' : '#e5e5e5',
         },
 
         nascimento: {
-            fontSize: fontScale * 15,
+            fontSize: '12@s',
             fontWeight: 'bold',
             color: theme == false ? '#000' : '#e5e5e5',
         },
 
         idade: {
-            fontSize: fontScale * 15,
+            fontSize: '12@s',
             fontWeight: 'bold',
             color: theme == false ? '#000' : '#e5e5e5',
         },
 
         paragraph: {
-            fontSize: fontScale * 14,
+            fontSize: '12@s',
             fontWeight: 'bold',
             color: theme == false ? '#000' : '#e5e5e5',
-            marginTop: height * 0.03,
+            marginTop: '14@vs',
             textAlign: 'left'
         },
 
         quoteBtn: {
-            padding: height * 0.03,
+            padding: '18@ms',
         }
 
     })
@@ -103,7 +101,7 @@ const Autores = () => {
                     color={theme == false ? '#0033ff' : '#e5e5e5'}
                     style={{
                         flex: 1,
-                        marginTop: height * 0.065
+                        marginTop: verticalScale(110)
                     }}
                 />
             ) : (
@@ -132,7 +130,7 @@ const Autores = () => {
                                             <FontAwesome
                                                 name='book'
                                                 color={theme == false ? '#000' : '#e5e5e5'}
-                                                size={height * 0.025}
+                                                size={scale(16)}
                                             />
                                         )}
                                         mode='contained'
@@ -145,7 +143,7 @@ const Autores = () => {
                                                 navigation.navigate('EpitectoScreen');
                                             }
                                         }}>
-                                        <Text style={{ fontSize: fontScale * 12 }}>Ir para citações</Text>
+                                        <Text style={{ fontSize: scale(11) }}>Ir para citações</Text>
                                     </Button>
                                 </Card.Actions>
                             </Card>

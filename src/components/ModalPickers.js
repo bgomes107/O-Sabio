@@ -2,10 +2,8 @@ import React, { useState, useEffect, useContext } from 'react';
 import {
   View,
   SafeAreaView,
-  StyleSheet,
   Text,
   TouchableOpacity,
-  useWindowDimensions
 } from 'react-native';
 import Datepicker from 'react-native-date-picker';
 import { useNavigation } from '@react-navigation/native';
@@ -18,6 +16,13 @@ import notifee, {
 } from '@notifee/react-native';
 import { Snackbar } from 'react-native-paper';
 import { ThemeContext } from '../context/Context';
+import {
+  scale,
+  verticalScale,
+  moderateScale,
+  moderateVerticalScale,
+  ScaledSheet
+} from 'react-native-size-matters';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import AS_IDs from '@react-native-async-storage/async-storage';
 import AS_STATUS from '@react-native-async-storage/async-storage';
@@ -33,7 +38,6 @@ export const ModalPickers = () => {
   const [dates, setDates] = useState(new Date(Date.now()));
   const [notificationIds, setNotificationIds] = useState('');
   const { theme } = useContext(ThemeContext);
-  const { height, width, scale, fontScale } = useWindowDimensions();
 
 
   useEffect(() => {
@@ -143,7 +147,7 @@ export const ModalPickers = () => {
   const onDismissFav = () => setFavVisible(false);
   const onDismissRemov = () => setRemoveVisible(false);
 
-  const styles = StyleSheet.create({
+  const styles = ScaledSheet.create({
     container: {
       flex: 1,
       backgroundColor: theme == false ? '#e9e9e9' : '#191919',
@@ -152,20 +156,20 @@ export const ModalPickers = () => {
     datePickerContainer: {
       alignItems: 'center',
       justifyContent: 'center',
-      paddingTop: height * 0.09,
+      paddingTop: '60@mvs',
     },
 
     btnArea: {
       alignItems: 'center',
       justifyContent: 'space-evenly',
-      paddingTop: height * 0.080,
+      paddingTop: '40@mvs',
       flexDirection: 'row',
     },
 
     btnDesab: {
-      width: width * 0.4,
-      height: height * 0.045,
-      borderRadius: height * 0.008,
+      width: '140@s',
+      height: '30@vs',
+      borderRadius: '6@s',
       backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
@@ -173,9 +177,9 @@ export const ModalPickers = () => {
     },
 
     btnAgend: {
-      width: width * 0.4,
-      height: height * 0.045,
-      borderRadius: height * 0.008,
+      width: '140@s',
+      height: '30@vs',
+      borderRadius: '6@s',
       backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
@@ -183,9 +187,9 @@ export const ModalPickers = () => {
     },
 
     btnAgendado: {
-      width: width * 0.4,
-      height: height * 0.045,
-      borderRadius: height * 0.008,
+      width: '140@s',
+      height: '30@vs',
+      borderRadius: '6@s',
       backgroundColor: '#4caf50',
       alignItems: 'center',
       justifyContent: 'center',
@@ -194,13 +198,13 @@ export const ModalPickers = () => {
 
     closeArea: {
       alignItems: 'center',
-      paddingTop: height * 0.080,
+      paddingTop: '45@mvs',
     },
 
     btnClose: {
-      width: width * 0.85,
-      height: height * 0.045,
-      borderRadius: height * 0.008,
+      width: '300@s',
+      height: '30@vs',
+      borderRadius: '6@s',
       backgroundColor: '#ff0000',
       alignItems: 'center',
       justifyContent: 'center',
@@ -214,10 +218,10 @@ export const ModalPickers = () => {
     <SafeAreaView style={styles.container}>
       <View style={styles.datePickerContainer}>
         <Text style={{
-          paddingBottom: height * 0.025,
+          paddingBottom: moderateVerticalScale(20),
           fontWeight: 'bold',
           color: theme == false ? '#000' : '#e5e5e5',
-          fontSize: fontScale * 12,
+          fontSize: scale(10),
         }}
         >
           Selecione a hora
@@ -230,7 +234,7 @@ export const ModalPickers = () => {
           androidVariant='iosClone'
           date={dates}
           onDateChange={date => setDates(date)}
-          style={{height: height * 0.22}}
+          style={{ height: verticalScale(140) }}
         />
       </View>
       <View style={styles.btnArea}>
@@ -240,11 +244,11 @@ export const ModalPickers = () => {
           <MaterialIcons
             name='alarm-off'
             color='#000'
-            size={height * 0.025}
-            style={{ marginRight: width * 0.02 }}
+            size={scale(16)}
+            style={{ marginRight: scale(4) }}
           />
           <Text style={{
-            fontSize: fontScale * 14,
+            fontSize: scale(12),
             fontWeight: 'bold',
             color: '#000'
           }}>
@@ -257,11 +261,11 @@ export const ModalPickers = () => {
             <MaterialIcons
               name='alarm-on'
               color='#fff'
-              size={height * 0.025}
-              style={{ marginRight: width * 0.02 }}
+              size={scale(16)}
+              style={{ marginRight: scale(4) }}
             />
             <Text style={{
-              fontSize: fontScale * 14,
+              fontSize: scale(12),
               fontWeight: 'bold',
               color: '#fff'
             }}>
@@ -275,11 +279,11 @@ export const ModalPickers = () => {
             <MaterialIcons
               name='add-alarm'
               color='#000'
-              size={height * 0.025}
-              style={{ marginRight: width * 0.02 }}
+              size={scale(16)}
+              style={{ marginRight: scale(4) }}
             />
             <Text style={{
-              fontSize: fontScale * 14,
+              fontSize: scale(12),
               fontWeight: 'bold',
               color: '#000'
             }}>
@@ -295,11 +299,11 @@ export const ModalPickers = () => {
           <FontAwesome
             name='close'
             color='#fff'
-            size={height * 0.025}
-            style={{ marginRight: width * 0.02 }}
+            size={scale(16)}
+            style={{ marginRight: scale(4) }}
           />
           <Text style={{
-            fontSize: height * 0.021,
+            fontSize: scale(12),
             fontWeight: 'bold',
             color: '#fff'
           }}>
@@ -312,10 +316,10 @@ export const ModalPickers = () => {
         duration={2500}
         onDismiss={onDismissFav}
         elevation={5}
-        style={{ backgroundColor: theme == false ? '#323232' : '#e5e5e5', marginBottom: height * 0.009 }}
+        style={{ backgroundColor: theme == false ? '#323232' : '#e5e5e5', marginBottom: verticalScale(80) }}
       >
         <Text style={{
-          fontSize: fontScale * 14,
+          fontSize: scale(12),
           color: theme == false ? '#fff' : '#323232',
           textAlign: 'center',
           fontWeight: 'bold'
@@ -329,10 +333,10 @@ export const ModalPickers = () => {
         duration={2500}
         onDismiss={onDismissRemov}
         elevation={5}
-        style={{ backgroundColor: theme == false ? '#323232' : '#e5e5e5', marginBottom: height * 0.009 }}
+        style={{ backgroundColor: theme == false ? '#323232' : '#e5e5e5', marginBottom: verticalScale(80) }}
       >
         <Text style={{
-          fontSize: fontScale * 14,
+          fontSize: scale(12),
           color: theme == false ? '#fff' : '#323232',
           textAlign: 'center',
           fontWeight: 'bold'

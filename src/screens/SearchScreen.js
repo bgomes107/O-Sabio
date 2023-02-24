@@ -9,6 +9,7 @@ import {
     useWindowDimensions
 } from 'react-native';
 import { Searchbar, Card, Title, Paragraph, IconButton, Snackbar } from 'react-native-paper';
+import { scale, verticalScale, moderateScale, ScaledSheet } from 'react-native-size-matters';
 import { useIsFocused } from '@react-navigation/native';
 import { ThemeContext } from '../context/Context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -25,7 +26,6 @@ const SearchScreen = () => {
     const [favVisible, setFavVisible] = useState(false);
     const [removeVisible, setRemoveVisible] = useState(false);
     const { theme } = useContext(ThemeContext);
-    const { height, width, scale, fontScale } = useWindowDimensions();
 
     const favoriteSnackBar = () => setFavVisible(!favVisible);
     const removeSnackBar = () => setRemoveVisible(!removeVisible);
@@ -142,8 +142,8 @@ const SearchScreen = () => {
 
         return (
 
-            <View style={{ padding: height * 0.017, backgroundColor: theme == false ? '#e9e9e9' : '#191919' }}>
-                <Card mode='elevated' style={{ backgroundColor: theme == false ? '#fff' : '#323232', padding: height * 0.006 }}>
+            <View style={{ padding: moderateScale(12), backgroundColor: theme == false ? '#e9e9e9' : '#191919' }}>
+                <Card mode='elevated' style={{ backgroundColor: theme == false ? '#fff' : '#323232', padding: moderateScale(3) }}>
                     <Title style={styles.title}>{item.nome}</Title>
                     <Card.Content>
                         <Paragraph style={styles.texto}>{item.texto}</Paragraph>
@@ -157,7 +157,7 @@ const SearchScreen = () => {
                             icon='share'
                             iconColor={theme == false ? '#000' : '#e5e5e5'}
                             containerColor={theme == false ? '#e9e9e9' : '#191919'}
-                            size={height * 0.032}
+                            size={scale(21)}
                             mode='contained-tonal'
                             animated={true}
                         />
@@ -167,7 +167,7 @@ const SearchScreen = () => {
                                 icon='cards-heart'
                                 iconColor={theme == false ? '#000' : '#e5e5e5'}
                                 containerColor={theme == false ? '#e9e9e9' : '#191919'}
-                                size={height * 0.032}
+                                size={scale(21)}
                                 mode='contained-tonal'
                                 animated={true}
                             />
@@ -178,7 +178,7 @@ const SearchScreen = () => {
                                 icon='cards-heart-outline'
                                 iconColor={theme == false ? '#000' : '#e5e5e5'}
                                 containerColor={theme == false ? '#e9e9e9' : '#191919'}
-                                size={height * 0.032}
+                                size={scale(21)}
                                 mode='contained-tonal'
                                 animated={true}
                             />
@@ -194,7 +194,7 @@ const SearchScreen = () => {
         return (
             <View
                 style={{
-                    height: height * 0.001,
+                    height: verticalScale(5),
                     width: '100%',
 
                 }}
@@ -203,44 +203,47 @@ const SearchScreen = () => {
     };
 
 
-    const styles = StyleSheet.create({
+    const styles = ScaledSheet.create({
 
         container: {
             flex: 1,
             backgroundColor: theme == false ? '#e9e9e9' : '#191919',
-            paddingBottom: height * 0.067
+            paddingBottom: '67@mvs'
         },
 
         textInputStyle: {
-            height: height * 0.060,
+            height: '40@vs',
             backgroundColor: theme == false ? '#e9e9e9' : '#191919',
             borderTopColor: theme == false ? '#e9e9e9' : '#191919',
 
         },
 
         title: {
-            fontSize: fontScale * 17,
+            fontSize: '16@s',
             fontWeight: 'bold',
             color: theme == false ? '#000' : '#e5e5e5',
-            marginLeft: width * 0.035
+            marginLeft: '15@s',
+            marginTop: '9@vs'
         },
 
         texto: {
-            fontSize: fontScale * 15,
+            fontSize: '14@s',
             fontWeight: 'bold',
             color: theme == false ? '#000' : '#e5e5e5',
-            marginTop: height * 0.003,
+            marginTop: '9@vs'
         },
 
         obra: {
-            fontSize: fontScale * 14,
+            fontSize: '14@s',
             fontWeight: 'bold',
             color: theme == false ? '#000' : '#e5e5e5',
-            marginTop: height * 0.02
+            marginTop: '9@vs'
         },
 
         btnArea: {
-            flexDirection: 'row',           
+            flexDirection: 'row',
+            paddingTop: '12@mvs',
+            justifyContent: 'space-between'
         }
     });
 
@@ -258,10 +261,10 @@ const SearchScreen = () => {
                 placeholder="O que você está pensando?"
                 placeholderTextColor={theme == false ? '#7f7f7f' : '#666666'}
                 clearIcon={() => (
-                    <EvilIcons name='close' color={theme == false ? '#000' : '#e5e5e5'} size={height * 0.035} />
+                    <EvilIcons name='close' color={theme == false ? '#000' : '#e5e5e5'} size={scale(21)} />
                 )}
                 inputStyle={{
-                    fontSize: fontScale * 13,
+                    fontSize: scale(13),
                     color: theme == false ? '#000' : '#e5e5e5',
                     alignItems: 'center'
                 }}
@@ -282,10 +285,10 @@ const SearchScreen = () => {
                     duration={2000}
                     onDismiss={onDismissFav}
                     elevation={5}
-                    style={{ backgroundColor: theme == false ? '#323232' : '#e5e5e5', marginBottom: height * -0.045 }}
+                    style={{ backgroundColor: theme == false ? '#323232' : '#e5e5e5', marginBottom: verticalScale(15) }}
                 >
                     <Text style={{
-                        fontSize: fontScale * 14,
+                        fontSize: scale(12),
                         color: theme == false ? '#fff' : '#323232',
                         textAlign: 'center',
                         fontWeight: 'bold'
@@ -299,10 +302,10 @@ const SearchScreen = () => {
                     duration={2000}
                     onDismiss={onDismissRemov}
                     elevation={5}
-                    style={{ backgroundColor: theme == false ? '#323232' : '#e5e5e5', marginBottom: height * -0.045 }}
+                    style={{ backgroundColor: theme == false ? '#323232' : '#e5e5e5', marginBottom: verticalScale(15) }}
                 >
                     <Text style={{
-                        fontSize: fontScale * 14,
+                        fontSize: scale(12),
                         color: theme == false ? '#fff' : '#323232',
                         textAlign: 'center',
                         fontWeight: 'bold'
